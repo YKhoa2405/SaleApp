@@ -12,6 +12,9 @@ class Category(db.Model):
     name = Column(String(50), nullable=False, unique=True)
     products = relationship('Product',backref='category',lazy=True)
 
+    def __str__(self):
+        return self.name
+
 class Product(db.Model):
     __tablename__ ='product'
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -19,6 +22,9 @@ class Product(db.Model):
     price = Column(Float, default=0)
     image = Column(String(500))
     category_id =Column(Integer, ForeignKey(Category.id),nullable=False)
+
+    def __str__(self):
+        return self.name
 
 if __name__ == '__main__':
     with app.app_context():
@@ -28,7 +34,7 @@ if __name__ == '__main__':
         # db.session.add(c1)
         # db.session.add(c2)
         # db.session.commit()
-        db.create_all()
+        # db.create_all()
         p1 = Product(name = 'Iphone13', price = 20000, category_id =1,image ="https://images.macrumors.com/t/9r84bU_ZTOTrUixxwhjHUFsAvD4=/800x0/smart/article-new/2017/09/iphonexdesign.jpg?lossy")
         p2 = Product(name = 'Iphone14', price = 20000, category_id =2,image ="https://images.macrumors.com/t/9r84bU_ZTOTrUixxwhjHUFsAvD4=/800x0/smart/article-new/2017/09/iphonexdesign.jpg?lossy")
         p3 = Product(name = 'Iphone15', price = 20000, category_id =1,image ="https://images.macrumors.com/t/9r84bU_ZTOTrUixxwhjHUFsAvD4=/800x0/smart/article-new/2017/09/iphonexdesign.jpg?lossy")
